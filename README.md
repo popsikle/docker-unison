@@ -1,8 +1,10 @@
 # Docker-Unison
 A docker volume container using [Unison](http://www.cis.upenn.edu/~bcpierce/unison/) for fast two-way folder sync. Created as an alternative to [slow boot2docker volumes on OS X](https://github.com/boot2docker/boot2docker/issues/593).
 
+Forked from leighmcculloch's unision container
+
 The docker image is available on Docker Hub: 
-[registry.hub.docker.com/u/leighmcculloch/unison/](https://registry.hub.docker.com/u/leighmcculloch/unison/)
+[registry.hub.docker.com/u/popsikle/unison/](https://registry.hub.docker.com/u/popsikle/unison/)
 
 ## Usage
 
@@ -11,7 +13,7 @@ The docker image is available on Docker Hub:
 First, you can launch a volume container exposing a volume with Unison.
 
 ```bash
-$ CID=$(docker run -d -p 5000:5000 -e UNISON_VERSION=2.48.3 leighmcculloch/unison)
+$ CID=$(docker run -d -p 5000:5000 -e UNISON_VERSION=2.48.3 popsikle/unison)
 ```
 
 You can then sync a local folder to `/unison` in the container with:
@@ -38,9 +40,10 @@ mywebserver:
   volumes_from:  
     - unison  
 unison:  
-  image: leighmcculloch/unison  
+  image: popsikle/unison  
   environment:  
     - UNISON_VERSION=2.48.3  
+    - UNISONLOCALHOSTNAME=unison
   ports:  
     - "5000:5000"
 ```
